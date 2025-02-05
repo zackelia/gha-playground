@@ -27,6 +27,13 @@ jobs:
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=linux-${{ matrix.platform }}" >> $GITHUB_ENV
 
+      - name: Free disk space
+        run: |
+          sudo rm -rf \
+            /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /usr/local/share/powershell /usr/share/swift /usr/local/.ghcup \
+            /usr/lib/jvm /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" || true
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
